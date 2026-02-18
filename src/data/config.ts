@@ -24,7 +24,7 @@ const config = {
     "Framer Motion",
   ],
   author: "Jasser Souissi",
-  email: "jassersouissi@gmail.com",
+  email: "jasser.souissi.741.@gmail.com",
   site: "https://jassersouissi.com",
 
   // for github stars button
