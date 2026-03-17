@@ -38,6 +38,20 @@ const AnimatedBackground = () => {
   const normalizeSkillName = (value: string) =>
     value.toLowerCase().replace(/[^a-z0-9]/g, "");
 
+  const clearSkillDisplay = () => {
+    if (!splineApp) return;
+    splineApp.setVariable("heading", "");
+    splineApp.setVariable("desc", "");
+  };
+
+  const setSkillDisplay = (skill: Skill) => {
+    if (!splineApp) return;
+    setSelectedSkill(skill);
+    selectedSkillRef.current = skill;
+    splineApp.setVariable("heading", skill.label);
+    splineApp.setVariable("desc", skill.shortDescription);
+  };
+
   const skillAliases: Record<string, SkillNames> = {
     react: SkillNames.ANGULAR,
     angularjs: SkillNames.ANGULAR,
@@ -107,16 +121,12 @@ const AnimatedBackground = () => {
       if (selectedSkillRef.current) playReleaseSound();
       setSelectedSkill(null);
       selectedSkillRef.current = null;
-      if (splineApp.getVariable("heading") && splineApp.getVariable("desc")) {
-        splineApp.setVariable("heading", "");
-        splineApp.setVariable("desc", "");
-      }
+      clearSkillDisplay();
     } else {
       if (!selectedSkillRef.current || selectedSkillRef.current.id !== hoveredSkill.id) {
         if (selectedSkillRef.current) playReleaseSound();
         playPressSound();
-        setSelectedSkill(hoveredSkill);
-        selectedSkillRef.current = hoveredSkill;
+        setSkillDisplay(hoveredSkill);
       }
     }
   };
@@ -134,24 +144,52 @@ const AnimatedBackground = () => {
       );
     };
 
-    splineApp.addEventListener("keyUp", () => {
+    const handleKeyUp = () => {
       if (!splineApp || isInputFocused()) return;
       playReleaseSound();
-      splineApp.setVariable("heading", "");
-      splineApp.setVariable("desc", "");
-    });
-    splineApp.addEventListener("keyDown", (e) => {
+      clearSkillDisplay();
+    };
+
+    const handleKeyDown = (e: SplineEvent) => {
       if (!splineApp || isInputFocused()) return;
       const skill = resolveSkillFromTarget(e.target as SPEObject);
       if (skill) {
         playPressSound();
-        setSelectedSkill(skill);
-        selectedSkillRef.current = skill;
-        splineApp.setVariable("heading", skill.label);
-        splineApp.setVariable("desc", skill.shortDescription);
+        setSkillDisplay(skill);
       }
-    });
+    };
+
+    const handleMouseDown = (e: SplineEvent) => {
+      if (!splineApp) return;
+      const skill = resolveSkillFromTarget(e.target as SPEObject);
+      if (!skill) return;
+
+      if (!selectedSkillRef.current || selectedSkillRef.current.id !== skill.id) {
+        if (selectedSkillRef.current) playReleaseSound();
+        playPressSound();
+      }
+
+      setSkillDisplay(skill);
+    };
+
+    const handleMouseUp = () => {
+      if (!selectedSkillRef.current) return;
+      playReleaseSound();
+    };
+
+    splineApp.addEventListener("keyUp", handleKeyUp);
+    splineApp.addEventListener("keyDown", handleKeyDown);
+    splineApp.addEventListener("mouseDown", handleMouseDown);
+    splineApp.addEventListener("mouseUp", handleMouseUp);
     splineApp.addEventListener("mouseHover", handleMouseHover);
+
+    return () => {
+      splineApp.removeEventListener("keyUp", handleKeyUp);
+      splineApp.removeEventListener("keyDown", handleKeyDown);
+      splineApp.removeEventListener("mouseDown", handleMouseDown);
+      splineApp.removeEventListener("mouseUp", handleMouseUp);
+      splineApp.removeEventListener("mouseHover", handleMouseHover);
+    };
   };
 
   // --- Animation Setup Helpers ---
@@ -339,11 +377,12 @@ const AnimatedBackground = () => {
   // Initialize GSAP and Spline interactions
   useEffect(() => {
     if (!splineApp) return;
-    handleSplineInteractions();
+    const teardownInteractions = handleSplineInteractions();
     setupScrollAnimations();
     bongoAnimationRef.current = getBongoAnimation();
     keycapAnimationsRef.current = getKeycapsAnimation();
     return () => {
+      teardownInteractions?.();
       bongoAnimationRef.current?.stop()
       keycapAnimationsRef.current?.stop()
     }
