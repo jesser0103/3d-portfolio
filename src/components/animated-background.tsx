@@ -60,6 +60,13 @@ const AnimatedBackground = () => {
       return SKILLS[aliasKey] ?? null;
     }
 
+    const partialAliasMatch = Object.entries(skillAliases).find(([alias]) =>
+      normalizedObjectName.includes(alias)
+    );
+    if (partialAliasMatch) {
+      return SKILLS[partialAliasMatch[1]] ?? null;
+    }
+
     return (
       Object.values(SKILLS).find((skill) => {
         const normalizedSkillName = normalizeSkillName(skill.name);
