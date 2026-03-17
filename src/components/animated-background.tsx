@@ -35,12 +35,53 @@ const AnimatedBackground = () => {
   const [keyboardRevealed, setKeyboardRevealed] = useState(false);
   const router = useRouter();
 
+  const normalizeSkillName = (value: string) =>
+    value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  const resolveSkillByObjectName = (objectName?: string) => {
+    if (!objectName) return null;
+
+    const direct = SKILLS[objectName as SkillNames];
+    if (direct) return direct;
+
+    const normalizedObjectName = normalizeSkillName(objectName);
+    return (
+      Object.values(SKILLS).find((skill) => {
+        const normalizedSkillName = normalizeSkillName(skill.name);
+        const normalizedSkillLabel = normalizeSkillName(skill.label);
+        return (
+          normalizedSkillName === normalizedObjectName ||
+          normalizedSkillLabel === normalizedObjectName ||
+          normalizedObjectName.includes(normalizedSkillName) ||
+          normalizedObjectName.includes(normalizedSkillLabel)
+        );
+      }) ?? null
+    );
+  };
+
+  const resolveSkillFromTarget = (target?: SPEObject | null) => {
+    let current = target as (SPEObject & { parent?: SPEObject }) | null | undefined;
+    let depth = 0;
+
+    while (current && depth < 6) {
+      const skill = resolveSkillByObjectName(current.name);
+      if (skill) return skill;
+      current = current.parent;
+      depth += 1;
+    }
+
+    return null;
+  };
+
   // --- Event Handlers ---
 
   const handleMouseHover = (e: SplineEvent) => {
-    if (!splineApp || selectedSkillRef.current?.name === e.target.name) return;
+    if (!splineApp) return;
 
-    if (e.target.name === "body" || e.target.name === "platform") {
+    const hoveredSkill = resolveSkillFromTarget(e.target as SPEObject);
+    if (hoveredSkill && selectedSkillRef.current?.id === hoveredSkill.id) return;
+
+    if (!hoveredSkill || e.target.name === "body" || e.target.name === "platform") {
       if (selectedSkillRef.current) playReleaseSound();
       setSelectedSkill(null);
       selectedSkillRef.current = null;
@@ -49,14 +90,11 @@ const AnimatedBackground = () => {
         splineApp.setVariable("desc", "");
       }
     } else {
-      if (!selectedSkillRef.current || selectedSkillRef.current.name !== e.target.name) {
-        const skill = SKILLS[e.target.name as SkillNames];
-        if (skill) {
-          if (selectedSkillRef.current) playReleaseSound();
-          playPressSound();
-          setSelectedSkill(skill);
-          selectedSkillRef.current = skill;
-        }
+      if (!selectedSkillRef.current || selectedSkillRef.current.id !== hoveredSkill.id) {
+        if (selectedSkillRef.current) playReleaseSound();
+        playPressSound();
+        setSelectedSkill(hoveredSkill);
+        selectedSkillRef.current = hoveredSkill;
       }
     }
   };
@@ -82,7 +120,7 @@ const AnimatedBackground = () => {
     });
     splineApp.addEventListener("keyDown", (e) => {
       if (!splineApp || isInputFocused()) return;
-      const skill = SKILLS[e.target.name as SkillNames];
+      const skill = resolveSkillFromTarget(e.target as SPEObject);
       if (skill) {
         playPressSound();
         setSelectedSkill(skill);
