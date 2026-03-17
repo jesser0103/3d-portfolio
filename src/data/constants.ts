@@ -4,8 +4,8 @@ export enum SkillNames {
   TS = "ts",
   HTML = "html",
   CSS = "css",
-  REACT = "react",
-  VUE = "vue",
+  ANGULAR = "react",
+  SPRING_BOOT = "vue",
   NEXTJS = "nextjs",
   TAILWIND = "tailwind",
   NODEJS = "nodejs",
@@ -68,23 +68,21 @@ export const SKILLS: Record<SkillNames, Skill> = {
     color: "#563d7c",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
   },
-  [SkillNames.REACT]: {
+  [SkillNames.ANGULAR]: {
     id: 5,
     name: "react",
-    label: "React",
-    shortDescription: `"use using" 
-using use = useUsing("use")`,
-    color: "#61dafb",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    label: "Angular",
+    shortDescription: "component-driven frontend with TypeScript power ⚡",
+    color: "#dd0031",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
   },
-  [SkillNames.VUE]: {
+  [SkillNames.SPRING_BOOT]: {
     id: 6,
     name: "vue",
-    label: "Vue",
-    shortDescription:
-      "the chill pill for your frontend, it hits different! 🟢😌",
-    color: "#41b883",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+    label: "Spring Boot",
+    shortDescription: "Java backend framework for fast, production-ready APIs 🚀",
+    color: "#6db33f",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
   },
   [SkillNames.NEXTJS]: {
     id: 7,
@@ -271,7 +269,7 @@ export const EXPERIENCE: Experience[] = [
     skills: [
       SkillNames.NEXTJS,
       SkillNames.TS,
-      SkillNames.REACT,
+      SkillNames.ANGULAR,
       SkillNames.NODEJS,
       SkillNames.POSTGRES,
       SkillNames.MONGODB,
@@ -292,8 +290,8 @@ export const EXPERIENCE: Experience[] = [
       "Focused on clean, maintainable code and interfaces that users actually enjoy.",
     ],
     skills: [
-      SkillNames.REACT,
-      SkillNames.VUE,
+      SkillNames.ANGULAR,
+      SkillNames.SPRING_BOOT,
       SkillNames.NODEJS,
       SkillNames.EXPRESS,
       SkillNames.MONGODB,

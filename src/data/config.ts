@@ -18,13 +18,13 @@ const config = {
     "Ghostchat",
     "web design",
     "GSAP",
-    "React",
+    "Angular",
     "Next.js",
     "Spline",
     "Framer Motion",
   ],
   author: "Jasser Souissi",
-  email: "jasser.souissi.741.@gmail.com",
+  email: "jasser.souissi.741@gmail.com",
   site: "https://jassersouissi.com",
 
   // for github stars button
@@ -36,10 +36,10 @@ const config = {
   },
   social: {
     twitter: "https://x.com/jassersouissi",
-    linkedin: "https://www.linkedin.com/in/jasser-souissi/",
+    linkedin: "https://www.linkedin.com/in/jasser-souissi-49b993174/",
     instagram: "https://www.instagram.com/jassersouissi",
     facebook: "https://www.facebook.com/jassersouissi/",
-    github: "https://github.com/jasser-souissi",
+    github: "https://github.com/jesser0103",
   },
 };
 export { config };

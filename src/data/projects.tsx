@@ -6,7 +6,7 @@ import { ArrowUpRight, ExternalLink, Link2, MoveUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { RiNextjsFill, RiNodejsFill, RiReactjsFill } from "react-icons/ri";
+import { RiNextjsFill, RiNodejsFill } from "react-icons/ri";
 import {
   SiChakraui,
   SiDocker,
@@ -19,13 +19,14 @@ import {
   SiPython,
   SiReactquery,
   SiSanity,
+  SiAngular,
+  SiSpringboot,
   SiShadcnui,
   SiSocketdotio,
   SiSupabase,
   SiTailwindcss,
   SiThreedotjs,
   SiTypescript,
-  SiVuedotjs,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 const BASE_PATH = "/assets/projects-screenshots";
@@ -180,17 +181,17 @@ const PROJECT_SKILLS = {
     fg: "white",
     icon: <SiTypescript />,
   },
-  vue: {
-    title: "Vue.js",
+  springboot: {
+    title: "Spring Boot",
     bg: "black",
     fg: "white",
-    icon: <SiVuedotjs />,
+    icon: <SiSpringboot />,
   },
-  react: {
-    title: "React.js",
+  angular: {
+    title: "Angular",
     bg: "black",
     fg: "white",
-    icon: <RiReactjsFill />,
+    icon: <SiAngular />,
   },
   sanity: {
     title: "Sanity",
@@ -349,7 +350,7 @@ const projects: Project[] = [
         PROJECT_SKILLS.js,
         PROJECT_SKILLS.next,
         PROJECT_SKILLS.chakra,
-        PROJECT_SKILLS.vue,
+        PROJECT_SKILLS.springboot,
       ],
       backend: [
         PROJECT_SKILLS.node,
@@ -396,7 +397,7 @@ const projects: Project[] = [
           <SlideShow images={[`${BASE_PATH}/couponluxury/categories.png`]} />
           <TypographyH3 className="my-4 mt-8">Custom CMS </TypographyH3>
           <p className="font-mono mb-2">
-            Powered by Vue.js, this bad boy allows us to keep the content
+            Powered by Spring Boot, this bad boy allows us to keep the content
             dynamic and up-to-date. From flash sales to limited-time offers, my
             CMS ensures everything&apos;s live and relevant.
           </p>
@@ -604,7 +605,7 @@ const projects: Project[] = [
     screenshots: ["1.png"],
     live: "https://naresh-khatri.github.io/JNTUA-result-analyser-spa/#/",
     skills: {
-      frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.vue],
+      frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.springboot],
       backend: [
         PROJECT_SKILLS.node,
         PROJECT_SKILLS.mongo,
