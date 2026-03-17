@@ -38,6 +38,15 @@ const AnimatedBackground = () => {
   const normalizeSkillName = (value: string) =>
     value.toLowerCase().replace(/[^a-z0-9]/g, "");
 
+  const skillAliases: Record<string, SkillNames> = {
+    react: SkillNames.ANGULAR,
+    angularjs: SkillNames.ANGULAR,
+    ng: SkillNames.ANGULAR,
+    vue: SkillNames.SPRING_BOOT,
+    spring: SkillNames.SPRING_BOOT,
+    springboot: SkillNames.SPRING_BOOT,
+  };
+
   const resolveSkillByObjectName = (objectName?: string) => {
     if (!objectName) return null;
 
@@ -45,6 +54,12 @@ const AnimatedBackground = () => {
     if (direct) return direct;
 
     const normalizedObjectName = normalizeSkillName(objectName);
+
+    const aliasKey = skillAliases[normalizedObjectName];
+    if (aliasKey) {
+      return SKILLS[aliasKey] ?? null;
+    }
+
     return (
       Object.values(SKILLS).find((skill) => {
         const normalizedSkillName = normalizeSkillName(skill.name);
