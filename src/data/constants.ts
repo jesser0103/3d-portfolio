@@ -261,10 +261,10 @@ export const EXPERIENCE: Experience[] = [
     title: "Freelance Full Stack Developer",
     company: "Self-employed",
     description: [
-      "Transformed chaotic Excel sheets into polished internal tools for various clients.",
-      "Shipped dashboards and custom CMS platforms tailored to each client's workflow.",
-      "Automated repetitive processes, improving efficiency and reducing human error.",
-      "Focused on clean, maintainable code and interfaces that users actually enjoy.",
+      "Developed intelligent, autonomous AI agents to automate complex workflows and data processing for clients.",
+      "Integrated Large Language Models (LLMs) into custom full-stack web applications and dashboards.",
+      "Built scalable backend architectures capable of efficiently handling and queuing AI-driven tasks.",
+      "Designed seamless user interfaces to make interacting with AI models intuitive and engaging.",
     ],
     skills: [
       SkillNames.ANGULAR,
