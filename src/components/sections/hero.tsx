@@ -77,7 +77,17 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    A Full Stack Web Developer
+                    AI Enthusiast & Full Stack Developer
+                  </p>
+                </BlurIn>
+                <BlurIn delay={1.4}>
+                  <p
+                    className={cn(
+                      "md:self-start mt-4 max-w-md font-light text-slate-500 dark:text-zinc-400",
+                      "text-sm sm:text-base md:text-lg"
+                    )}
+                  >
+                    I'm an Artificial Intelligence enthusiast and 2nd-year Industrial Computer Engineering student at ENET'Com Sfax, actively seeking an internship. While my core focus is on AI, I also bring strong skills in Full Stack Web Development and Embedded Systems to build end-to-end intelligent solutions.
                   </p>
                 </BlurIn>
               </div>
