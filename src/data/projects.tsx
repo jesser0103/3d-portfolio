@@ -260,7 +260,7 @@ const projects: Project[] = [
       ],
     },
     live: "https://www.codingducks.xyz/",
-    github: "https://github.com/Naresh-Khatri/Coding-Ducks",
+    github: "https://github.com/jesser0103/Coding-Ducks",
     get content() {
       return (
         <div>
@@ -568,7 +568,7 @@ const projects: Project[] = [
     src: "/assets/projects-screenshots/ghostchat/1.png",
     screenshots: ["1.png", "2.png", "3.png", "4.png"],
     live: "https://ghostchat.vercel.app",
-    github: "https://github.com/Naresh-Khatri/GhostChat",
+    github: "https://github.com/jesser0103/GhostChat",
     skills: {
       frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.chakra],
       backend: [PROJECT_SKILLS.supabase],
@@ -603,7 +603,7 @@ const projects: Project[] = [
     title: "JNTUA Results Analyzer",
     src: "/assets/projects-screenshots/jra/1.png",
     screenshots: ["1.png"],
-    live: "https://naresh-khatri.github.io/JNTUA-result-analyser-spa/#/",
+    live: "https://jesser0103.github.io/JNTUA-result-analyser-spa/#/",
     skills: {
       frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.springboot],
       backend: [
